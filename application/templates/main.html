@@ -7,7 +7,7 @@
 <body>
     {% if user.is_authenticated %}
         <div>
-            <p>{{ user.get_username }}</p>
+            <a href="/account">{{ user.get_username }}</a>
             <form action="/logout">
                 <input type="submit" value="logout"/>
             </form>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+</head>
+<body>
+    <h1>Articles</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Text</th>
+                <th>Topic</th>
+                <th>Date Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.text }}</td>
+                    <td>{{ article.topic }}</td>
+                    <td>{{ article.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/add-article">Добавить статью</a>
+</body>
+</html>
