@@ -3,11 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    username = None
-    email = models.EmailField('email adress', unique=True)
-    telephone = models.CharField(max_length=20)
-    REQUIRED_FIELDS = []
-    USERNAME_FIELD = "email"
+    username = models.CharField(unique=True, max_length=20)
 
 
 class Article(models.Model):
@@ -17,3 +13,10 @@ class Article(models.Model):
     topic = models.CharField(max_length=200)
     date = models.DateTimeField()
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Comment(models.Model):
+    id = models.IntegerField(primary_key=True)
+    text = models.CharField(max_length=1000)
+    date = models.DateTimeField()
+    articleId = models.ForeignKey(Article, on_delete=models.CASCADE)

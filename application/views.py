@@ -1,54 +1,40 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
-from application.models import User as MyUser
-from application.forms import RegistrationForm, LoginForm, LogoutForm
+from application.models import User
+from application.forms import RegistrationForm, LoginForm
 
 
-def index(request):
-    return render(request, "index.html")
-
-
-def page(request):
-    print(request.user)
-    return render(request, "test.html")
+def main(request):
+    return render(request, "main.html")
 
 
 def registration(request):
     if request.method == "POST":
-        user_login = request.POST.get("login")
+        username = request.POST.get("username")
         password = request.POST.get("password")
-        role = "user"
         email = request.POST.get("email")
 
-        user = MyUser(email=email, password=password)
+        user = User(username=username, password=password, email=email)
         user.save()
 
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-        print(user.email)
 
-        return HttpResponse()
+        return redirect('/')
     else:
         registration_form = RegistrationForm()
         return render(request, "registration.html", {"form": registration_form})
 
 
-def login_login(request):
+def login_controller(request):
     if request.method == "POST":
-        m_user = MyUser.objects.get(email=request.POST.get("email"))
-        #user = User.objects.create_user(m_user.login, m_user.email, m_user.password)
-        login(request, m_user, backend='django.contrib.auth.backends.ModelBackend')
-        print(m_user.email)
-        return HttpResponse()
+        user = User.objects.get(username=request.POST.get("username"))
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        return redirect('/')
     else:
         login_form = LoginForm()
         return render(request, "login.html", {"form": login_form})
 
 
-def logout_logout(request):
-    if request.method == "POST":
-        logout(request)
-        return HttpResponse()
-    else:
-        logout_form = LogoutForm()
-        return render(request, "logout.html", {"form": logout_form})
+def logout_controller(request):
+    logout(request)
+    return redirect('/')
