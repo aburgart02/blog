@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
-from application.models import User, Article
+from application.models import User, Article, Comment
 from application.forms import RegistrationForm, LoginForm, AddArticleForm
 
 
 def main(request):
     articles = Article.objects.all()
-    data = {"articles": articles}
-    return render(request, "main.html", context=data)
+    return render(request, "main.html", context={"articles": articles})
 
 
 def registration(request):
@@ -45,8 +44,13 @@ def logout_controller(request):
 def account(request):
     user = User.objects.get(username=request.user.username)
     articles = user.articles.all()
-    data = {"articles": articles}
-    return render(request, "account.html", context=data)
+    return render(request, "account.html", context={"articles": articles})
+
+
+def get_article(request, article_id):
+    article = Article.objects.get(id=article_id)
+    comments = article.comments.all()
+    return render(request, "article.html", context={"article": article, "comments": comments})
 
 
 def add_article(request):
@@ -83,3 +87,12 @@ def delete_article(request, article_id):
     article = user.articles.get(id=article_id)
     article.delete()
     return redirect('/account')
+
+
+def add_comment(request, article_id):
+    user = User.objects.get(username=request.user.username)
+    article = user.articles.get(id=article_id)
+    text = request.POST.get("text")
+    comment = Comment(text=text, articleId=article, username=user.username)
+    comment.save()
+    return redirect('/article/' + str(article_id))

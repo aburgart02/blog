@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.title }}</title>
+</head>
+    <body>
+        <p>{{ article.title }}</p>
+        <p>{{ article.text }}</p>
+        <p>{{ article.topic }}</p>
+        <p>{{ article.date }}</p>
+        {% for comment in comments %}
+            <p>{{ comment.text }} {{ comment.date }} {{ comment.username }}</p>
+        {% endfor %}
+        {% if user.is_authenticated %}
+            <form method="POST" action="/add-comment/{{ article.id }}">
+                {% csrf_token %}
+                <div>
+                    <label for="id_text"></label>
+                    <input type="text" name="text" required="" id="id_text">
+                </div>
+                <input type="submit" value="Добавить комментарий" >
+            </form>
+        {% endif %}
+    </body>
+</html>

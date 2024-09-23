@@ -27,7 +27,9 @@ urlpatterns = [
     path('login', views.login_controller),
     path('logout', views.logout_controller),
     path('account', views.account),
+    path('article/<int:article_id>', views.get_article),
     path('add-article', views.add_article),
     path('delete-article/<int:article_id>', views.delete_article),
-    path('edit-article/<int:article_id>', views.edit_article)
+    path('edit-article/<int:article_id>', views.edit_article),
+    path('add-comment/<int:article_id>', views.add_comment)
 ]

@@ -28,7 +28,7 @@
         <tbody>
             {% for article in articles %}
                 <tr>
-                    <td>{{ article.title }}</td>
+                    <td><a href="/article/{{ article.id }}">{{ article.title }}</a></td>
                     <td>{{ article.text }}</td>
                     <td>{{ article.topic }}</td>
                     <td>{{ article.date }}</td>
