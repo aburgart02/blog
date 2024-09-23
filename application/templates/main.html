@@ -15,5 +15,26 @@
     {% else %}
         <a href="/login">Войти в аккаунт</a>
     {% endif %}
+    <h1>Articles</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Text</th>
+                <th>Topic</th>
+                <th>Date Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.text }}</td>
+                    <td>{{ article.topic }}</td>
+                    <td>{{ article.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

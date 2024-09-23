@@ -27,5 +27,7 @@ urlpatterns = [
     path('login', views.login_controller),
     path('logout', views.logout_controller),
     path('account', views.account),
-    path('add-article', views.add_article)
+    path('add-article', views.add_article),
+    path('delete-article/<int:article_id>', views.delete_article),
+    path('edit-article/<int:article_id>', views.edit_article)
 ]

@@ -5,7 +5,9 @@ from application.forms import RegistrationForm, LoginForm, AddArticleForm
 
 
 def main(request):
-    return render(request, "main.html")
+    articles = Article.objects.all()
+    data = {"articles": articles}
+    return render(request, "main.html", context=data)
 
 
 def registration(request):
@@ -61,5 +63,23 @@ def add_article(request):
         return render(request, "add_article.html", {"form": add_article_form})
 
 
-def edit_article(request):
-    return render(request, "edit_article.html")
+def edit_article(request, article_id):
+    if request.method == "POST":
+        user = User.objects.get(username=request.user.username)
+        article = user.articles.get(id=article_id)
+        article.title = request.POST.get("title")
+        article.text = request.POST.get("text")
+        article.topic = request.POST.get("topic")
+        article.save()
+        return redirect('/account')
+    else:
+        user = User.objects.get(username=request.user.username)
+        article = user.articles.get(id=article_id)
+        return render(request, "edit_article.html", {"article": article})
+
+
+def delete_article(request, article_id):
+    user = User.objects.get(username=request.user.username)
+    article = user.articles.get(id=article_id)
+    article.delete()
+    return redirect('/account')

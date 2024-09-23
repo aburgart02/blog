@@ -13,6 +13,8 @@
                 <th>Text</th>
                 <th>Topic</th>
                 <th>Date Created</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +24,8 @@
                     <td>{{ article.text }}</td>
                     <td>{{ article.topic }}</td>
                     <td>{{ article.date }}</td>
+                    <td><a href="/delete-article/{{ article.id }}">Удалить</a></td>
+                    <td><a href="/edit-article/{{ article.id }}">Изменить</a></td>
                 </tr>
             {% endfor %}
         </tbody>
