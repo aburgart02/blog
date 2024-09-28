@@ -7,10 +7,11 @@
     <body>
         <p>{{ article.title }}</p>
         <p>{{ article.text }}</p>
-        <p>{{ article.topic }}</p>
+        <td><a href="/articles/{{ article.topic }}">{{ article.topic }}</a></td>
         <p>{{ article.date }}</p>
+        <p><a href="/profile/{{ article.userId.username }}">{{ article.userId.username }}</a></p>
         {% for comment in comments %}
-            <p>{{ comment.text }} {{ comment.date }} {{ comment.username }}</p>
+            <p>{{ comment.text }} {{ comment.date }} <a href="/profile/{{ comment.userId.username }}">{{ comment.userId.username }}</a></p>
         {% endfor %}
         {% if user.is_authenticated %}
             <form method="POST" action="/add-comment/{{ article.id }}">

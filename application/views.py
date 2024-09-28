@@ -53,6 +53,12 @@ def get_article(request, article_id):
     return render(request, "article.html", context={"article": article, "comments": comments})
 
 
+def get_articles_by_topic(request, topic):
+    articles = Article.objects.filter(topic=topic)
+    print(len(articles))
+    return render(request, "articles_by_topic.html", context={"articles": articles, "topic": topic})
+
+
 def add_article(request):
     if request.method == "POST":
         user = User.objects.get(username=request.user.username)
@@ -91,8 +97,16 @@ def delete_article(request, article_id):
 
 def add_comment(request, article_id):
     user = User.objects.get(username=request.user.username)
-    article = user.articles.get(id=article_id)
+    article = Article.objects.get(id=article_id)
     text = request.POST.get("text")
-    comment = Comment(text=text, articleId=article, username=user.username)
+    comment = Comment(text=text, articleId=article, userId=user)
     comment.save()
     return redirect('/article/' + str(article_id))
+
+
+def get_profile(request, username):
+    if username == request.user.username:
+        return redirect('/account')
+    user = User.objects.get(username=username)
+    articles = user.articles.all()
+    return render(request, "profile.html", context={"articles": articles, "username": username})

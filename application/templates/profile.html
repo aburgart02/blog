@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Account</title>
+    <title>Profile</title>
 </head>
 <body>
-    <h1>My articles</h1>
+    <h1>{{ username }} Articles</h1>
     <table>
         <thead>
             <tr>
@@ -24,12 +24,9 @@
                     <td>{{ article.text }}</td>
                     <td><a href="/articles/{{ article.topic }}">{{ article.topic }}</a></td>
                     <td>{{ article.date }}</td>
-                    <td><a href="/delete-article/{{ article.id }}">Удалить</a></td>
-                    <td><a href="/edit-article/{{ article.id }}">Изменить</a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="/add-article">Добавить статью</a>
 </body>
 </html>
