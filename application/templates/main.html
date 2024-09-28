@@ -6,6 +6,9 @@
 </head>
 <body>
     {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+            <p><a href="/administrator">Панель администратора</a></p>
+        {% endif %}
         <div>
             <a href="/account">{{ user.get_username }}</a>
             <form action="/logout">

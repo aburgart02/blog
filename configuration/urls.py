@@ -33,5 +33,7 @@ urlpatterns = [
     path('delete-article/<int:article_id>', views.delete_article),
     path('edit-article/<int:article_id>', views.edit_article),
     path('add-comment/<int:article_id>', views.add_comment),
-    path('profile/<str:username>', views.get_profile)
+    path('profile/<str:username>', views.get_profile),
+    path('administrator', views.administrator),
+    path('delete-user/<str:username>', views.delete_user)
 ]

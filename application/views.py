@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from application.models import User, Article, Comment
@@ -55,7 +56,6 @@ def get_article(request, article_id):
 
 def get_articles_by_topic(request, topic):
     articles = Article.objects.filter(topic=topic)
-    print(len(articles))
     return render(request, "articles_by_topic.html", context={"articles": articles, "topic": topic})
 
 
@@ -110,3 +110,18 @@ def get_profile(request, username):
     user = User.objects.get(username=username)
     articles = user.articles.all()
     return render(request, "profile.html", context={"articles": articles, "username": username})
+
+
+def delete_user(request, username):
+    if not request.user.is_superuser:
+        return HttpResponse('Unauthorized', status=401)
+    user = User.objects.get(username=username)
+    user.delete()
+    return redirect('/administrator')
+
+
+def administrator(request):
+    if not request.user.is_superuser:
+        return HttpResponse('Unauthorized', status=401)
+    users = User.objects.all()
+    return render(request, "admin.html", context={"users": users})
