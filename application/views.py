@@ -30,6 +30,8 @@ def registration(request):
 def login_controller(request):
     if request.method == "POST":
         user = User.objects.get(username=request.POST.get("username"))
+        if user.password != request.POST.get("password"):
+            return HttpResponse('Unauthorized', status=401)
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         return redirect('/')
     else:
@@ -118,6 +120,21 @@ def delete_user(request, username):
     user = User.objects.get(username=username)
     user.delete()
     return redirect('/administrator')
+
+
+def edit_user(request, username):
+    if not request.user.is_superuser:
+        return HttpResponse('Unauthorized', status=401)
+    if request.method == "POST":
+        user = User.objects.get(username=username)
+        user.username = request.POST.get("username")
+        user.email = request.POST.get("email")
+        user.password = request.POST.get("password")
+        user.save()
+        return redirect('/administrator')
+    else:
+        user = User.objects.get(username=username)
+        return render(request, "edit_user.html", {"user": user})
 
 
 def administrator(request):

@@ -35,5 +35,6 @@ urlpatterns = [
     path('add-comment/<int:article_id>', views.add_comment),
     path('profile/<str:username>', views.get_profile),
     path('administrator', views.administrator),
-    path('delete-user/<str:username>', views.delete_user)
+    path('delete-user/<str:username>', views.delete_user),
+    path('edit-user/<str:username>', views.edit_user)
 ]
