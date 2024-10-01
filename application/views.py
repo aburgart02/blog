@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
@@ -53,7 +55,8 @@ def account(request):
 def get_article(request, article_id):
     article = Article.objects.get(id=article_id)
     comments = article.comments.all()
-    return render(request, "article.html", context={"article": article, "comments": comments})
+    user_comments = [comment.id for comment in comments if comment.userId.username == request.user.username]
+    return render(request, "article.html", context={"article": article, "comments": comments, "user_comments": user_comments})
 
 
 def get_articles_by_topic(request, topic):
@@ -135,6 +138,16 @@ def edit_user(request, username):
     else:
         user = User.objects.get(username=username)
         return render(request, "edit_user.html", {"user": user})
+
+
+def edit_comment(request, comment_id):
+    raw_data = request.body.decode().replace("'", '"')
+    data = json.loads(raw_data)
+    user = User.objects.get(username=request.user.username)
+    comment = user.comments.get(id=comment_id)
+    comment.text = data["text"]
+    comment.save()
+    return HttpResponse()
 
 
 def administrator(request):

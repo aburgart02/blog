@@ -11,7 +11,28 @@
         <p>{{ article.date }}</p>
         <p><a href="/profile/{{ article.userId.username }}">{{ article.userId.username }}</a></p>
         {% for comment in comments %}
-            <p>{{ comment.text }} {{ comment.date }} <a href="/profile/{{ comment.userId.username }}">{{ comment.userId.username }}</a></p>
+            {% if comment.id in user_comments %}
+                <p id="comment-text-{{comment.id}}">{{ comment.text }}</p>
+                <p>{{ comment.date }}</p>
+                <p>
+                    <a href="/profile/{{ comment.userId.username }}">
+                    {{ comment.userId.username }}
+                </a>
+                </p>
+                <button id="edit-button-{{comment.id}}" onclick="edit('{{comment.id}}')">
+                    Редактировать
+                </button>
+                <button id="save-button-{{comment.id}}" onclick="save('{{comment.id}}')" hidden>
+                    Сохранить
+                </button>
+            {% else %}
+                <p>{{ comment.text }}</p>
+                <p>{{ comment.date }}</p>
+                <p>
+                    <a href="/profile/{{ comment.userId.username }}">
+                    {{ comment.userId.username }}
+                </a>
+            {% endif %}
         {% endfor %}
         {% if user.is_authenticated %}
             <form method="POST" action="/add-comment/{{ article.id }}">
@@ -25,4 +46,30 @@
         {% endif %}
         <p><a href="/">Вернуться на главную</a></p>
     </body>
+    <script>
+        function edit(comment_id) {
+            let comment = document.getElementById(`comment-text-${comment_id}`);
+            comment.outerHTML = `<input id="edit-comment-text-${comment_id}" value="${comment.textContent}">`
+            let saveButton = document.getElementById(`save-button-${comment_id}`);
+            saveButton.hidden = false;
+        }
+
+        function save(comment_id) {
+            let comment = document.getElementById(`edit-comment-text-${comment_id}`);
+            let value = comment.value;
+
+            let json = JSON.stringify({
+              text: value
+            });
+
+            fetch(`http://127.0.0.1:8000/edit-comment/${comment_id}`, {
+              method: "POST",
+              body: json,
+            })
+
+            comment.outerHTML = `<p id="comment-text-${comment_id}">${value}</p>`
+            let saveButton = document.getElementById(`save-button-${comment_id}`);
+            saveButton.hidden = true;
+        }
+    </script>
 </html>

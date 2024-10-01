@@ -36,5 +36,6 @@ urlpatterns = [
     path('profile/<str:username>', views.get_profile),
     path('administrator', views.administrator),
     path('delete-user/<str:username>', views.delete_user),
-    path('edit-user/<str:username>', views.edit_user)
+    path('edit-user/<str:username>', views.edit_user),
+    path('edit-comment/<int:comment_id>', views.edit_comment)
 ]
