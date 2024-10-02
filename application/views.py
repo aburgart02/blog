@@ -149,6 +149,13 @@ def edit_comment(request, comment_id):
     comment = user.comments.get(id=comment_id)
     comment.text = data["text"]
     comment.save()
+    return redirect('/article')
+
+
+def delete_comment(request, comment_id):
+    user = User.objects.get(username=request.user.username)
+    comment = user.comments.get(id=comment_id)
+    comment.delete()
     return HttpResponse()
 
 

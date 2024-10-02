@@ -25,6 +25,9 @@
                 <button id="save-button-{{comment.id}}" onclick="save('{{comment.id}}')" hidden>
                     Сохранить
                 </button>
+                <button id="delete-button-{{comment.id}}" onclick="delete_comment('{{comment.id}}')" hidden>
+                    Удалить
+                </button>
             {% else %}
                 <p>{{ comment.text }}</p>
                 <p>{{ comment.date }}</p>
@@ -52,6 +55,8 @@
             comment.outerHTML = `<input id="edit-comment-text-${comment_id}" value="${comment.textContent}">`
             let saveButton = document.getElementById(`save-button-${comment_id}`);
             saveButton.hidden = false;
+            let deleteButton = document.getElementById(`delete-button-${comment_id}`);
+            deleteButton.hidden = false;
         }
 
         function save(comment_id) {
@@ -70,6 +75,21 @@
             comment.outerHTML = `<p id="comment-text-${comment_id}">${value}</p>`
             let saveButton = document.getElementById(`save-button-${comment_id}`);
             saveButton.hidden = true;
+            let deleteButton = document.getElementById(`delete-button-${comment_id}`);
+            deleteButton.hidden = true;
+        }
+
+        function delete_comment(comment_id) {
+            fetch(`http://127.0.0.1:8000/delete-comment/${comment_id}`, {
+              method: "POST",
+            })
+
+            let comment = document.getElementById(`edit-comment-text-${comment_id}`);
+            comment.outerHTML = `<p id="comment-text-${comment_id}">${value}</p>`
+            let saveButton = document.getElementById(`save-button-${comment_id}`);
+            saveButton.hidden = true;
+            let deleteButton = document.getElementById(`delete-button-${comment_id}`);
+            deleteButton.hidden = true;
         }
     </script>
 </html>
