@@ -1,10 +1,11 @@
 import json
 
-from django.http import HttpResponse
+from django.core import serializers
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
-from application.models import User, Article, Comment
-from application.forms import RegistrationForm, LoginForm, AddArticleForm
+from application.models import User, Article, Comment, Topic
+from application.forms import RegistrationForm, LoginForm
 
 
 def main(request):
@@ -60,31 +61,32 @@ def get_article(request, article_id):
 
 
 def get_articles_by_topic(request, topic):
-    articles = Article.objects.filter(topic=topic)
+    selected_topic = Topic.objects.get(title=topic)
+    articles = Article.objects.filter(topicId=selected_topic)
     return render(request, "articles_by_topic.html", context={"articles": articles, "topic": topic})
 
 
 def add_article(request):
     if request.method == "POST":
         user = User.objects.get(username=request.user.username)
+        topic = Topic.objects.get(title=request.POST.get("topic_title"))
         title = request.POST.get("title")
         text = request.POST.get("text")
-        topic = request.POST.get("topic")
-        article = Article(title=title, text=text, topic=topic, userId=user)
+        article = Article(title=title, text=text, topicId=topic, userId=user)
         article.save()
         return redirect('/account')
     else:
-        add_article_form = AddArticleForm()
-        return render(request, "add_article.html", {"form": add_article_form})
+        return render(request, "add_article.html")
 
 
 def edit_article(request, article_id):
     if request.method == "POST":
         user = User.objects.get(username=request.user.username)
+        topic = Topic.objects.get(title=request.POST.get("topic_title"))
         article = user.articles.get(id=article_id)
         article.title = request.POST.get("title")
         article.text = request.POST.get("text")
-        article.topic = request.POST.get("topic")
+        article.topicId = topic
         article.save()
         return redirect('/account')
     else:
@@ -148,6 +150,21 @@ def edit_comment(request, comment_id):
     comment.text = data["text"]
     comment.save()
     return HttpResponse()
+
+
+def get_topics(request):
+    topics = Topic.objects.all()
+    data = serializers.serialize('json', topics)
+    return JsonResponse(data, safe=False)
+
+
+def add_topic(request):
+    if not request.user.is_superuser:
+        return HttpResponse('Unauthorized', status=401)
+    title = request.POST.get("title")
+    topic = Topic(title=title)
+    topic.save()
+    return redirect('/administrator')
 
 
 def administrator(request):

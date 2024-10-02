@@ -11,9 +11,3 @@ class RegistrationForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField()
-
-
-class AddArticleForm(forms.Form):
-    title = forms.CharField()
-    text = forms.CharField()
-    topic = forms.CharField()

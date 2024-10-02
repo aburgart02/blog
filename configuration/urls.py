@@ -37,5 +37,7 @@ urlpatterns = [
     path('administrator', views.administrator),
     path('delete-user/<str:username>', views.delete_user),
     path('edit-user/<str:username>', views.edit_user),
-    path('edit-comment/<int:comment_id>', views.edit_comment)
+    path('edit-comment/<int:comment_id>', views.edit_comment),
+    path('get-topics', views.get_topics),
+    path('add-topic', views.add_topic)
 ]

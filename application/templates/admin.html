@@ -30,6 +30,14 @@
             {% endfor %}
         </tbody>
     </table>
+    <form method="POST" action="/add-topic">
+        {% csrf_token %}
+        <div>
+            <label for="id_topic"></label>
+            <input type="text" name="title" required="" id="id_topic">
+        </div>
+        <input type="submit" value="Добавить тему" >
+    </form>
     <p><a href="/">Вернуться на главную</a></p>
 </body>
 </html>

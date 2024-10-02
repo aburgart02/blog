@@ -7,7 +7,7 @@
     <body>
         <p>{{ article.title }}</p>
         <p>{{ article.text }}</p>
-        <td><a href="/articles/{{ article.topic }}">{{ article.topic }}</a></td>
+        <td><a href="/articles/{{ article.topicId.title }}">{{ article.topicId.title }}</a></td>
         <p>{{ article.date }}</p>
         <p><a href="/profile/{{ article.userId.username }}">{{ article.userId.username }}</a></p>
         {% for comment in comments %}

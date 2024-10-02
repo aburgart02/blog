@@ -5,12 +5,58 @@
     <title>Add Article</title>
 </head>
 <body>
-    <form method="POST">
+    <form method="POST" action="/add-article">
         {% csrf_token %}
-        <table>
-            {{ form }}
-        </table>
-        <input type="submit" value="Добавить" >
+        <div>
+            <label for="id_title">Title:</label>
+            <input type="text" name="title" required="" id="id_title">
+        </div>
+        <div>
+            <label for="id_text">Text:</label>
+            <input type="text" name="text" required="" id="id_text">
+        </div>
+        <div>
+            <label for="topic-select">Topic:</label>
+            <select name="topic_title" id="topic-select">
+                <option value="" selected hidden disabled>Выберите рубрику</option>
+            </select>
+        </div>
+
+        <input type="submit" value="Сохранить">
     </form>
+    <p><a href="/account">Вернуться на страницу аккаунта</a></p>
+    <script>
+        window.onload = function() {
+          download();
+        };
+
+        function download() {
+            let response = fetch(`http://127.0.0.1:8000/get-topics`, {
+              method: "GET",
+            })
+            response.then(response => {
+              return response.json();
+            }).then(data => {
+              const regex = /"title": "(.*?)"/g;
+
+                let match;
+                let titles = [];
+
+                while ((match = regex.exec(data)) !== null) {
+                    titles.push(match[1]);
+                }
+
+                let dropdown = document.getElementById(`topic-select`);
+                for (let i = 0; i < titles.length; i++) {
+                    if (titles[i] != `{{ article.topicId.title }}`) {
+                        dropdown.innerHTML += `<option value="${titles[i]}">${titles[i]}</option>`
+                    }
+                }
+                console.log(titles);
+            }).catch(error => {
+              console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
