@@ -11,6 +11,7 @@
         <p>{{ article.date }}</p>
         <p><a href="/profile/{{ article.userId.username }}">{{ article.userId.username }}</a></p>
         {% for comment in comments %}
+            <div id="comment-wrapper-{{comment.id}}">
             {% if comment.id in user_comments %}
                 <p id="comment-text-{{comment.id}}">{{ comment.text }}</p>
                 <p>{{ comment.date }}</p>
@@ -36,6 +37,7 @@
                     {{ comment.userId.username }}
                 </a>
             {% endif %}
+            </div>
         {% endfor %}
         {% if user.is_authenticated %}
             <form method="POST" action="/add-comment/{{ article.id }}">
@@ -84,8 +86,8 @@
               method: "POST",
             })
 
-            let comment = document.getElementById(`edit-comment-text-${comment_id}`);
-            comment.outerHTML = `<p id="comment-text-${comment_id}">${value}</p>`
+            let comment = document.getElementById(`comment-wrapper-${comment_id}`);
+            comment.outerHTML = ``;
             let saveButton = document.getElementById(`save-button-${comment_id}`);
             saveButton.hidden = true;
             let deleteButton = document.getElementById(`delete-button-${comment_id}`);
