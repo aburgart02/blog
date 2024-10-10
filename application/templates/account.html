@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Account</title>
+    <link rel="stylesheet" href="{% static 'css/account_styles.css'%}" type="text/css">
 </head>
 <body>
     <h1>My articles</h1>
@@ -30,7 +32,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <a href="/add-article">Добавить статью</a>
-    <p><a href="/">Вернуться на главную</a></p>
+    <a class="add-article-link" href="/add-article">Добавить статью</a>
+    <p><a class="return-home" href="/">Вернуться на главную</a></p>
 </body>
 </html>

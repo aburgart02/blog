@@ -1,17 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{{ article.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/article_styles.css'%}" type="text/css">
 </head>
     <body>
-        <p>{{ article.title }}</p>
-        <p>{{ article.text }}</p>
-        <td><a href="/articles/{{ article.topicId.title }}">{{ article.topicId.title }}</a></td>
-        <p>{{ article.date }}</p>
-        <p><a href="/profile/{{ article.userId.username }}">{{ article.userId.username }}</a></p>
+        <div class="article-box">
+            <p>{{ article.title }}</p>
+            <p>{{ article.text }}</p>
+            <td><a href="/articles/{{ article.topicId.title }}">{{ article.topicId.title }}</a></td>
+            <p>{{ article.date }}</p>
+            <p><a href="/profile/{{ article.userId.username }}">{{ article.userId.username }}</a></p>
+        </div>
         {% for comment in comments %}
-            <div id="comment-wrapper-{{comment.id}}">
+            <div class="comment-box" id="comment-wrapper-{{comment.id}}">
             {% if comment.id in user_comments %}
                 <p id="comment-text-{{comment.id}}">{{ comment.text }}</p>
                 <p>{{ comment.date }}</p>

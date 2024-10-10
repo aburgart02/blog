@@ -1,0 +1,73 @@
+/* Reset some default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333; /* Dark text color */
+    padding: 20px;
+}
+
+/* Form styling */
+form {
+    background-color: #fff; /* White background for the form */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 400px; /* Max width for the form */
+    margin: auto; /* Center the form */
+}
+
+/* Input and label styling */
+div {
+    margin-bottom: 15px; /* Space between form fields */
+}
+
+label {
+    display: block; /* Labels on their own line */
+    margin-bottom: 5px; /* Space below labels */
+    font-weight: bold; /* Bold labels for emphasis */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%; /* Full width inputs */
+    padding: 10px; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size for inputs */
+}
+
+/* Submit button styling */
+input[type="submit"] {
+    background-color: #3498db; /* Blue background for button */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 10px 15px; /* Padding inside button */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size for button */
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Return link styling */
+p {
+    margin-top: 20px; /* Space above the return link */
+}
+
+p a {
+    color: #e74c3c; /* Red color for the return link */
+    text-decoration: none; /* No underline */
+}
+
+p a:hover {
+    text-decoration: underline; /* Underline on hover */
+}

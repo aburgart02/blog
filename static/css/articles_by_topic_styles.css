@@ -1,0 +1,87 @@
+/* Reset some default styles */
+body, h1, table, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+}
+
+/* Main title */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #2c3e50; /* Darker color for better contrast */
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Header styling */
+th {
+    background-color: #3498db; /* Blue background for headers */
+    color: white;
+}
+
+/* Row hover effect */
+tbody tr:hover {
+    background-color: #f1f1f1; /* Light gray on hover */
+}
+
+/* Link styles */
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Return link styling */
+p {
+    margin-top: 20px;
+}
+
+p a {
+    color: #e74c3c; /* Red color for return link */
+}
+
+p a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    table {
+        font-size: 0.9em; /* Slightly smaller font size on mobile */
+    }
+
+    th, td {
+        padding: 10px; /* Reduce padding for mobile */
+    }
+}

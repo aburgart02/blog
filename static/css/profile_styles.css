@@ -1,0 +1,82 @@
+/* Reset some default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9; /* Light background color */
+    color: #333; /* Dark text color */
+    line-height: 1.6; /* Improved readability */
+    padding: 20px; /* Padding around the body */
+}
+
+/* Header styling */
+h1 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 30px; /* Space below the heading */
+    font-size: 2.5em; /* Larger font size for the title */
+    color: #007bff; /* Blue color for the title */
+}
+
+/* Table styling */
+table {
+    width: 100%; /* Full width of the table */
+    border-collapse: collapse; /* Remove gaps between cells */
+    margin-top: 20px; /* Space above the table */
+}
+
+th, td {
+    padding: 12px; /* Padding inside cells */
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #ddd; /* Light border below rows */
+}
+
+th {
+    background-color: #007bff; /* Blue background for headers */
+    color: white; /* White text for headers */
+    font-weight: bold; /* Bold text for headers */
+}
+
+/* Row hover effect */
+tbody tr:hover {
+    background-color: #f1f1f1; /* Light gray on row hover */
+}
+
+/* Link styling in table */
+a {
+    color: #007bff; /* Blue links */
+    text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Footer link styling */
+p {
+    text-align: center; /* Center footer link */
+    margin-top: 20px; /* Space above the paragraph */
+}
+
+p a {
+    color: #007bff; /* Blue color for the return link */
+}
+
+p a:hover {
+    text-decoration: underline; /* Underline on hover for return link */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em; /* Smaller font size for smaller screens */
+    }
+
+    table {
+        font-size: 14px; /* Smaller font size for tables on small screens */
+    }
+}
