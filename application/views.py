@@ -19,11 +19,13 @@ def registration(request):
         password = request.POST.get("password")
         email = request.POST.get("email")
 
-        user = User(username=username, password=password, email=email)
-        user.save()
+        try:
+            user = User(username=username, password=password, email=email)
+            user.save()
+        except:
+            return HttpResponse('Bad Request', status=400)
 
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-
         return redirect('/')
     else:
         registration_form = RegistrationForm()
