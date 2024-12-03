@@ -11,7 +11,7 @@ from selenium import webdriver
 class BlogTestCase(unittest.TestCase):
     def setUp(self):
         self.url = "http://127.0.0.1:8000"
-        self.driver = webdriver.Edge()
+        self.driver = webdriver.Edge(executable_path=r"C:\Users\aburg\Desktop\msedgedriver.exe")
 
     def tearDown(self):
         self.driver.quit()

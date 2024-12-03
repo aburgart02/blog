@@ -3,22 +3,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Article</title>
+    <title>Добавление статья</title>
     <link rel="stylesheet" href="{% static 'css/add_article_styles.css'%}" type="text/css">
 </head>
 <body>
     <form method="POST" action="/add-article">
         {% csrf_token %}
         <div>
-            <label for="id_title">Title:</label>
+            <label for="id_title">Название:</label>
             <input type="text" name="title" required="" id="id_title">
         </div>
         <div>
-            <label for="id_text">Text:</label>
+            <label for="id_text">Текст:</label>
             <input type="text" name="text" required="" id="id_text">
         </div>
         <div>
-            <label for="topic-select">Topic:</label>
+            <label for="topic-select">Тема:</label>
             <select required name="topic_title" id="topic-select">
                 <option value="" selected hidden disabled>Выберите рубрику</option>
             </select>
