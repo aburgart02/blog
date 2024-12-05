@@ -10,15 +10,15 @@
     <form method="POST" action="/edit-article/{{ article.id }}">
         {% csrf_token %}
         <div>
-            <label for="id_title">Title:</label>
+            <label for="id_title">Название:</label>
             <input type="text" name="title" required="" id="id_title" value="{{ article.title }}">
         </div>
         <div>
-            <label for="id_text">Text:</label>
+            <label for="id_text">Текст:</label>
             <input type="text" name="text" required="" id="id_text" value="{{ article.text }}">
         </div>
         <div>
-            <label for="topic-select">Topic:</label>
+            <label for="topic-select">Тема:</label>
             <select name="topic_title" id="topic-select">
                 <option value="{{ article.topicId.title }}">{{ article.topicId.title }}</option>
             </select>

@@ -41,7 +41,7 @@ class BlogTestCase(unittest.TestCase):
 
     def test_home_page_title(self):
         self.driver.get(self.url)
-        self.assertEqual("Main", self.driver.title)
+        self.assertEqual("Главная страница", self.driver.title)
 
     def test_registration(self):
         url = f'{self.url}/registration'
