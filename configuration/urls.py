@@ -20,25 +20,6 @@ from django.urls import path
 from application import views
 
 urlpatterns = [
-    path('', views.main),
-    path('/', views.main),
     path('admin/', admin.site.urls),
-    path('registration', views.registration),
-    path('login', views.login_controller),
-    path('logout', views.logout_controller),
-    path('account', views.account),
-    path('article/<int:article_id>', views.get_article),
-    path('articles/<str:topic>', views.get_articles_by_topic),
-    path('add-article', views.add_article),
-    path('delete-article/<int:article_id>', views.delete_article),
-    path('edit-article/<int:article_id>', views.edit_article),
-    path('add-comment/<int:article_id>', views.add_comment),
-    path('profile/<str:username>', views.get_profile),
-    path('administrator', views.administrator),
-    path('delete-user/<str:username>', views.delete_user),
-    path('edit-user/<str:username>', views.edit_user),
-    path('edit-comment/<int:comment_id>', views.edit_comment),
-    path('get-topics', views.get_topics),
-    path('add-topic', views.add_topic),
-    path('delete-comment/<int:comment_id>', views.delete_comment),
+    path('transcribe/', views.transcribe_view, name='transcribe_audio'),
 ]
